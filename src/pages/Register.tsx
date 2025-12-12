@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext.tsx";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; // ✅ Toastify import
+import { toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
@@ -60,9 +60,9 @@ export default function Register() {
 
     if (!res.ok) {
       setErrors((prev) => ({ ...prev, submit: res.error || "Registration failed" }));
-      toast.error(res.error || "Registration failed"); // ✅ Toastify error
+      toast.error(res.error || "Registration failed"); 
     } else {
-      toast.success("Registered successfully!"); // ✅ Toastify success
+      toast.success("Registered successfully!"); 
       navigate("/categories");
     }
   };
