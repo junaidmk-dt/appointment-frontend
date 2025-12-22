@@ -63,7 +63,7 @@ export default function Register() {
       toast.error(res.error || "Registration failed"); 
     } else {
       toast.success("Registered successfully!"); 
-      navigate("/categories");
+      navigate("/login");
     }
   };
 
