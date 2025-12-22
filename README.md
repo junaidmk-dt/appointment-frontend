@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Appointment Frontend For Users
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the **frontend of the Appointment Booking Application for Users**, built using React and TypeScript.  
+It allows users to register, login, browse service categories, view providers, and book appointments with proper validations.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Features**
 
-### `npm start`
+1. **Authentication**
+   - Login for existing users
+   - Register form for new users
+   - Toast notifications for success/failure of login and registration
+   - Authentication state managed via `AuthContext.tsx`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. **Category Browsing**
+   - Displays a list of categories after successful login
+   - Navigate to providers of selected category
+   - Category cards displayed via `CategoryCard.tsx` component
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. **Provider Details**
+   - View detailed information about a provider
+   - Provider cards displayed via `ProviderCard.tsx`
+   - “Book Appointment” button available on provider details page
 
-### `npm test`
+4. **Booking Form**
+   - Form to book appointments
+   - Cannot select past dates
+   - Time selection from current time up to 30 minutes ahead
+   - Toast messages for successful or failed bookings
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. **Notifications**
+   - Toast messages shown for all important actions (register, login, booking, errors)
+   - Notifications handled via `NotificationContext.tsx` and `NotificationsDropdown.tsx`
 
-### `npm run build`
+6. **Protected Routes**
+   - Certain pages are accessible only to authenticated users via `ProtectedRoute.tsx`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## **Project Structure (Main Pages / Components)**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+src/
+├── api/
+│ └── axios.ts # Axios instance for API calls
+├── components/
+│ ├── CategoryCard.tsx
+│ ├── Navbar.tsx
+│ ├── NotificationsDropdown.tsx
+│ ├── ProtectedRoute.tsx
+│ └── ProviderCard.tsx
+├── context/
+│ ├── AuthContext.tsx # Authentication state management
+│ └── NotificationContext.tsx
+├── pages/
+│ ├── Login.tsx
+│ ├── Register.tsx
+│ ├── Category.tsx
+│ ├── Provider.tsx
+│ ├── ProviderDetails.tsx
+│ └── Booking.tsx
+├── App.tsx
+├── index.tsx
+├── App.css
+├── index.css
+├── logo.svg
+├── setupTests.js
+├── reportWebVitals.js
+└── react-app-env.d.ts
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## **Installation & Setup**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Clone the repository:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+git clone https://github.com/junaidmk-dt/appointment-frontend.git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+2. **Navigate to the project folder:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+cd appointment-frontend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+3. **Install dependencies:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+npm install
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. **Start the development server:**
 
-### Making a Progressive Web App
+npm start
+Open the app in your browser at http://localhost:3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+5. **Usage Workflow**
 
-### Advanced Configuration
+=> Open the app → see Login Page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+=> If you don’t have an account → click Register to create one.
 
-### Deployment
+=> After login → Category Page is displayed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+=> Click a category → Provider Page for that category.
 
-### `npm run build` fails to minify
+=> Click View More on a provider → Provider Details Page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+=> Click Book → open Booking Form.
+
+=> Cannot select past dates
+
+=> Time selection from current time up to 30 minutes ahead
+
+=> On successful booking → show success toast
+
+=> On failure → show error toast
+
+=> Toast messages are also displayed for login and registration outcomes.
+
+6. **Dependencies**
+
+=> React
+=> TypeScript
+=> React Router
+=> react-toastify (for toast notifications)
+=> Tailwind Css
