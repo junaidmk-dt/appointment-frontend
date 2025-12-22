@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/axios.ts";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 interface Provider {
@@ -11,12 +11,12 @@ interface Provider {
 
 export default function BookAppointment() {
   const { providerId } = useParams<{ providerId: string }>();
-  
+
+  const today = new Date().toISOString().split("T")[0];
+
   const [provider, setProvider] = useState<Provider | null>(null);
-  const [date, setDate] = useState<string>(new Date().toISOString().split("T")[0]);
-  const [time, setTime] = useState<string>(
-    new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })
-  );
+  const [date, setDate] = useState<string>(today);
+  const [time, setTime] = useState<string>("");
 
   useEffect(() => {
     const fetchProvider = async () => {
@@ -28,6 +28,7 @@ export default function BookAppointment() {
         toast.error("Failed to fetch provider details");
       }
     };
+
     fetchProvider();
   }, [providerId]);
 
@@ -37,15 +38,38 @@ export default function BookAppointment() {
       return;
     }
 
+    // Convert selected date + time to Date object
     const [hours, minutes] = time.split(":").map(Number);
-    const newDateTime = new Date(date);
-    newDateTime.setHours(hours, minutes, 0, 0);
+    const appointmentStart = new Date(date);
+    appointmentStart.setHours(hours, minutes, 0, 0);
+
+    const now = new Date();
+
+    // ⛔ Prevent booking past time
+    if (appointmentStart <= now) {
+      toast.error("You cannot book an appointment in the past");
+      return;
+    }
+
+    // ⛔ Booking must be 30 minutes before appointment
+    const cutoffTime = new Date(
+      appointmentStart.getTime() - 30 * 60 * 1000
+    );
+
+    if (now > cutoffTime) {
+      toast.error(
+        "You must book the appointment at least 30 minutes before the selected time"
+      );
+      return;
+    }
 
     try {
       await api.post("/appointment", {
         providerId,
-        start: newDateTime.toISOString(),
-        end: new Date(newDateTime.getTime() + 60 * 60 * 1000).toISOString(),
+        start: appointmentStart.toISOString(),
+        end: new Date(
+          appointmentStart.getTime() + 60 * 60 * 1000
+        ).toISOString(),
       });
 
       toast.success("Appointment booked successfully! 🎉");
@@ -59,7 +83,12 @@ export default function BookAppointment() {
     }
   };
 
-  if (!provider) return <p className="text-center mt-6 text-gray-700 text-sm">Loading...</p>;
+  if (!provider)
+    return (
+      <p className="text-center mt-6 text-gray-700 text-sm">Loading...</p>
+    );
+
+  const isToday = date === today;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -68,13 +97,15 @@ export default function BookAppointment() {
           Book Appointment with {provider.name}
         </h1>
 
-        {/* Form Fields with vertical spacing */}
         <div className="space-y-4">
           {/* Date Picker */}
           <div>
-            <label className="block text-gray-700 mb-1 text-sm">Date:</label>
+            <label className="block text-gray-700 mb-1 text-sm">
+              Date:
+            </label>
             <input
               type="date"
+              min={today}
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="w-full border rounded-md p-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
@@ -83,13 +114,23 @@ export default function BookAppointment() {
 
           {/* Time Picker */}
           <div>
-            <label className="block text-gray-700 mb-1 text-sm">Time:</label>
+            <label className="block text-gray-700 mb-1 text-sm">
+              Time:
+            </label>
             <input
               type="time"
               value={time}
+              min={
+                isToday
+                  ? new Date().toTimeString().slice(0, 5)
+                  : undefined
+              }
               onChange={(e) => setTime(e.target.value)}
               className="w-full border rounded-md p-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
             />
+            <p className="text-xs text-gray-500 mt-1">
+              * Booking must be at least 30 minutes before appointment time
+            </p>
           </div>
 
           {/* Book Button */}
@@ -101,15 +142,17 @@ export default function BookAppointment() {
           </button>
         </div>
 
-        {/* Selected Date/Time Display */}
-        <p className="mt-4 text-gray-600 text-center text-sm">
-          Selected:{" "}
-          {new Date(`${date}T${time}`).toLocaleString("en-US", {
-            dateStyle: "medium",
-            timeStyle: "short",
-            hour12: true,
-          })}
-        </p>
+        {/* Selected Date/Time Preview */}
+        {time && (
+          <p className="mt-4 text-gray-600 text-center text-sm">
+            Selected:{" "}
+            {new Date(`${date}T${time}`).toLocaleString("en-US", {
+              dateStyle: "medium",
+              timeStyle: "short",
+              hour12: true,
+            })}
+          </p>
+        )}
       </div>
     </div>
   );

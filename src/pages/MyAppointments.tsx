@@ -20,6 +20,9 @@ const MyAppointments: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSlot, setSelectedSlot] = useState<{ [key: string]: string }>({});
 
+  const isActionAllowed = (status: string) =>
+    status === "pending" ;
+
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -39,11 +42,7 @@ const MyAppointments: React.FC = () => {
   }, []);
 
   const handleCancel = async (id: string) => {
-    const appointment = appointments.find((a) => a._id === id);
-    if (!appointment || appointment.status === "cancelled") {
-      toast.error("This appointment is already cancelled.");
-      return;
-    }
+
     if (!window.confirm("Do you want to cancel this appointment?")) return;
 
     try {
@@ -138,13 +137,12 @@ const MyAppointments: React.FC = () => {
 
                 {/* Status */}
                 <span
-                  className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-2 ${
-                    appt.status === "approved"
-                      ? "bg-green-100 text-green-700"
-                      : appt.status === "pending"
+                  className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mb-2 ${appt.status === "approved"
+                    ? "bg-green-100 text-green-700"
+                    : appt.status === "pending"
                       ? "bg-yellow-100 text-yellow-700"
                       : "bg-red-100 text-red-700"
-                  }`}
+                    }`}
                 >
                   {appt.status}
                 </span>
@@ -164,12 +162,11 @@ const MyAppointments: React.FC = () => {
                   />
                   <button
                     onClick={() => handleReschedule(appt)}
-                    disabled={appt.status === "cancelled"}
-                    className={`mt-2 py-1.5 rounded text-white text-sm transition ${
-                      appt.status === "cancelled"
+                    disabled={!isActionAllowed(appt.status)}
+                    className={`mt-2 py-1.5 rounded text-white text-sm transition ${!isActionAllowed(appt.status)
                         ? "bg-gray-400 cursor-not-allowed"
                         : "bg-blue-500 hover:bg-blue-600"
-                    }`}
+                      }`}
                   >
                     Reschedule
                   </button>
@@ -178,14 +175,13 @@ const MyAppointments: React.FC = () => {
                 {/* Cancel */}
                 <button
                   onClick={() => handleCancel(appt._id)}
-                  disabled={appt.status === "cancelled"}
-                  className={`mt-1 py-1.5 rounded text-white text-sm transition ${
-                    appt.status === "cancelled"
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-red-500 hover:bg-red-600"
-                  }`}
+                  disabled={!isActionAllowed(appt.status)}
+                  className={`mt-1 py-1.5 rounded text-white text-sm transition ${!isActionAllowed(appt.status)
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-red-500 hover:bg-red-600"
+                    }`}
                 >
-                  {appt.status === "cancelled" ? "Already Cancelled" : "Cancel"}
+                  Cancel
                 </button>
               </div>
             ))}
