@@ -76,36 +76,36 @@ It allows users to register, login, browse service categories, view providers, a
 
 5. **Usage Workflow**
 
-=> Open the app → see Login Page.
+    => Open the app → see Login Page.
 
-=> If you don’t have an account → click Register to create one.
+    => If you don’t have an account → click Register to create one.
 
-=> After login → Category Page is displayed.
+    => After login → Category Page is displayed.
 
-=> Click a category → Provider Page for that category.
+    => Click a category → Provider Page for that category.
 
-=> Click View More on a provider → Provider Details Page.
+    => Click View More on a provider → Provider Details Page.
 
-=> Click Book → open Booking Form.
+    => Click Book → open Booking Form.
 
-=> Cannot select past dates
+    => Cannot select past dates
 
-=> Time selection from current time up to 30 minutes ahead
+    => Time selection from current time up to 30 minutes ahead
 
-=> On successful booking → show success toast
+    => On successful booking → show success toast
 
-=> On failure → show error toast
+    => On failure → show error toast
 
-=> Toast messages are also displayed for login and registration outcomes.
+    => Toast messages are also displayed for login and registration outcomes.
 
 6. **Dependencies**
 
-=> React
+   => React
 
-=> TypeScript
+   => TypeScript
 
-=> React Router
+   => React Router
 
-=> react-toastify (for toast notifications)
+   => react-toastify (for toast notifications)
 
-=> Tailwind Css
+   => Tailwind Css
