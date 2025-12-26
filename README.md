@@ -49,30 +49,30 @@ It allows users to register, login, browse service categories, view providers, a
 
 6. **Protected Routes**
    
-   - Certain pages are accessible only to authenticated users via `ProtectedRoute.tsx`
+    - Certain pages are accessible only to authenticated users via `ProtectedRoute.tsx`
 
 ## **Installation & Setup**
 
 1. **Clone the repository:**
 
-git clone https://github.com/junaidmk-dt/appointment-frontend.git
+       git clone https://github.com/junaidmk-dt/appointment-frontend.git
 
 
 2. **Navigate to the project folder:**
 
-cd appointment-frontend
+       cd appointment-frontend
 
 
 3. **Install dependencies:**
 
-npm install
+       npm install
 
 
 4. **Start the development server:**
 
-npm start
+       npm start
 
-Open the app in your browser at http://localhost:3000
+       Open the app in your browser at http://localhost:3000
 
 5. **Usage Workflow**
 
