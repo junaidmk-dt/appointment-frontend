@@ -95,7 +95,7 @@ export default function Register() {
             className="w-full p-3 mt-1 rounded-lg bg-white/70 focus:bg-white focus:ring-2 focus:ring-indigo-300 outline-none"
             placeholder="https://example.com/avatar.jpg"
           />
-          {errors.avatar && <p className="text-red-200 text-sm mt-1">{errors.avatar}</p>}
+          {errors.avatar && <p className="text-red-800 text-sm mt-1">{errors.avatar}</p>}
         </div>
 
         {/* Name */}
@@ -108,7 +108,7 @@ export default function Register() {
             className="w-full p-3 mt-1 rounded-lg bg-white/70 focus:bg-white focus:ring-2 focus:ring-indigo-300 outline-none"
             placeholder="Your full name"
           />
-          {errors.name && <p className="text-red-200 text-sm mt-1">{errors.name}</p>}
+          {errors.name && <p className="text-red-800 text-sm mt-1">{errors.name}</p>}
         </div>
 
         {/* Email */}
@@ -121,7 +121,7 @@ export default function Register() {
             className="w-full p-3 mt-1 rounded-lg bg-white/70 focus:bg-white focus:ring-2 focus:ring-indigo-300 outline-none"
             placeholder="you@example.com"
           />
-          {errors.email && <p className="text-red-200 text-sm mt-1">{errors.email}</p>}
+          {errors.email && <p className="text-red-800 text-sm mt-1">{errors.email}</p>}
         </div>
 
         {/* Password */}
@@ -134,7 +134,7 @@ export default function Register() {
             className="w-full p-3 mt-1 rounded-lg bg-white/70 focus:bg-white focus:ring-2 focus:ring-indigo-300 outline-none"
             placeholder="Enter password"
           />
-          {errors.password && <p className="text-red-200 text-sm mt-1">{errors.password}</p>}
+          {errors.password && <p className="text-red-800 text-sm mt-1">{errors.password}</p>}
         </div>
 
         {/* Button */}
