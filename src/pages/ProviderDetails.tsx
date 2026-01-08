@@ -45,7 +45,7 @@ export default function ProviderDetails() {
         <div className="flex justify-center">
           {provider.avatar ? (
             <img
-              src={provider.avatar}
+              src={`${process.env.REACT_APP_API_URL}/providers/${provider._id}/avatar`}
               alt={provider.name}
               className="w-24 h-24 rounded-full object-cover shadow-sm border-2 border-white"
             />
