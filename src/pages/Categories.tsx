@@ -8,7 +8,6 @@ interface Category {
   _id: string;
   name: string;
   description: string;
-  image: string;
 }
 
 export default function Categories() {
@@ -83,7 +82,7 @@ export default function Categories() {
             id={cat._id}
             name={cat.name}
             description={cat.description}
-            image={cat.image}
+            image={`${process.env.REACT_APP_API_URL}/categories/${cat._id}/image`}
           />
         ))}
       </div>

@@ -57,7 +57,7 @@ export default function Providers() {
                 speciality={provider.speciality}
                 hourlyPrice={provider.hourlyPrice}
                 city={provider.city}
-                avatar={provider.avatar}
+                avatar={`${process.env.REACT_APP_API_URL}/providers/${provider._id}/avatar`}
                 address="" 
               />
             ))}
