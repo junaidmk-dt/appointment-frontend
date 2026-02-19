@@ -39,7 +39,7 @@ export default function ProviderDetails() {
 return (
   <div className="h-[552px] flex justify-center items-center bg-gray-100 dark:bg-neutral-950 px-4">
 
-    <div className="h-[500px] w-full max-w-5xl h-full bg-white dark:bg-neutral-900 
+    <div className="h-[500px] w-full max-w-5xl  bg-white dark:bg-neutral-900 
                     rounded-3xl shadow-xl overflow-hidden flex">
 
       {/* ===== LEFT SIDE - IMAGE ===== */}
